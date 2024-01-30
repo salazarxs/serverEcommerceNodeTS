@@ -1,9 +1,12 @@
-const postImg = require('../helpers/uploadImg.js');
-const UsersModel = require('../models/user.js');
-const { v4: uuidv4 } = require('uuid');
-const fs = require('fs');
-const deleteImage = require('../helpers/deleteImg.js');
-// const bcrypt = require('bcrypt-pbkdf');
+
+
+import postImg from '../helpers/uploadImg.js';
+import UsersModel from '../models/user.js';
+import { v4 as uuidv4 } from 'uuid';
+import fs from 'fs'
+import deleteImage from '../helpers/deleteImg.js';
+
+
 const controller = {};
 
 controller.postNewUser = async (req, res) => {
@@ -157,7 +160,4 @@ controller.testUser = async (req, res) => {
 
 
 
-
-
-
-module.exports = controller;
+export default controller

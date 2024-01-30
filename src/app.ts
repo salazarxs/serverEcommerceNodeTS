@@ -1,10 +1,11 @@
 import express from "express";
 import cors from "cors";
 import fileUpload from "express-fileupload";
+import router from "./routes/user.js";
+import dotenv from "dotenv";
 
-import userRoutes from "./routes/user.js";
+dotenv.config();
 
-require("dotenv").config();
 const myapp = express();
 
 myapp.set("port", process.env.PORT || 3005);
@@ -43,13 +44,9 @@ myapp.use(express.static("public"));
 myapp.use(express.json());
 myapp.use(fileUpload());
 // Configuración de codificación en el backend (Node.js / Express)
-myapp.use(express.json({ encoding: "utf-8" }));
+myapp.use(express.json());
 
 // routes
-myapp.use("/api/v1", userRoutes);
-// app.use('/api/v1', require('./routes/routes.plant.js'));
-// app.use('/api/v1', require('./routes/routes.ambientcondition.js'));
-
-//module.exports = myapp;
+myapp.use("/api/v1", router);
 
 export default myapp;
