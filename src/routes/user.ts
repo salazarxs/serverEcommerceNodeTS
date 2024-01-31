@@ -1,4 +1,5 @@
-const { Router } = require("express");
+// const { Router } = require("express");
+import { Router } from "express";
 
 const router = Router();
 
@@ -9,4 +10,4 @@ router.route('/user/profileimage').put(putProfileImage);
 router.route('/user/getprofileimage').post(getProfileImage);
 router.route('/user/testuser/:id').get(testUser); */
 
-module.exports = router;
+export default router;

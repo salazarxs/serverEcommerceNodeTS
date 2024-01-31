@@ -1,11 +1,18 @@
-const express = require("express");
+/* const express = require("express");
+const { Application } = require("express");
 const cors = require("cors");
 const fileUpload = require("express-fileupload");
-const dotenv = require("dotenv");
+const dotenv = require("dotenv"); */
+
+import Express, { Application } from "express";
+import cors from "cors";
+import dotenv from "dotenv";
+import fileUpload from "express-fileupload";
+import UserRoutes from "./routes/user";
 
 dotenv.config();
 
-const myapp = express();
+const myapp: Application = Express();
 
 myapp.set("port", process.env.PORT || 3005);
 
@@ -32,7 +39,7 @@ const corsOptions = {
 
 myapp.use(cors(corsOptions));
 
-myapp.use(express.static("public"));
+myapp.use(Express.static("public"));
 
 /* myapp.use((req: Request, res: Response, next: any) => {
   res.header("Access-Control-Allow-Origin", "*");
@@ -40,12 +47,12 @@ myapp.use(express.static("public"));
   res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
   next();
 }); */
-myapp.use(express.json());
+myapp.use(Express.json());
 myapp.use(fileUpload());
 // Configuración de codificación en el backend (Node.js / Express)
-myapp.use(express.json());
+myapp.use(Express.json());
 
 // routes
-myapp.use("/api/v1", require("./routes/user"));
+myapp.use("/api/v1", UserRoutes);
 
-module.exports = myapp;
+export default myapp;

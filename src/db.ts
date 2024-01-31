@@ -1,12 +1,14 @@
-const { Sequelize } = require("sequelize");
+import { Sequelize } from "sequelize";
 
-const db = new Sequelize(
-  process.env.MYSQL_DB,
-  process.env.MYSQL_USER,
-  process.env.MYSQL_PASSWORD,
-  {
-    host: process.env.MYSQL_HOST,
-    dialect: "mysql",
-  }
-);
-module.exports = db;
+const { MYSQL_DB, MYSQL_USER, MYSQL_PASSWORD, MYSQL_HOST } = process.env;
+
+if (!MYSQL_DB || !MYSQL_USER || !MYSQL_PASSWORD || !MYSQL_HOST) {
+  throw new Error("Faltan variables de entorno necesarias.");
+}
+
+const db = new Sequelize(MYSQL_DB, MYSQL_USER, MYSQL_PASSWORD, {
+  host: MYSQL_HOST,
+  dialect: "mysql",
+});
+
+export default db;

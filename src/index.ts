@@ -1,10 +1,10 @@
-const app = require("./app");
+import myapp from "./app";
 
 require("./db.ts");
 
 const main = async () => {
-  await app.listen(app.get("port"));
-  console.log(`server on port ${app.get("port")}`);
+  await myapp.listen(myapp.get("port"));
+  console.log(`server on port ${myapp.get("port")}`);
 };
 
 main();

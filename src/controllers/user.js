@@ -1,10 +1,13 @@
-const UsersModel = require('../models/user.js');
-const { v4: uuidv4 } = require('uuid');
+// const UsersModel = require('../models/user.js');
+// const { v4: uuidv4 } = require('uuid');
 
-const deleteImage = require('../helpers/deleteImg.js');
+// const deleteImage = require('../helpers/deleteImg.js');
 
-const postImg = require('../helpers/uploadImg.js')
-
+// const postImg = require('../helpers/uploadImg.js')
+import UsersModel from "../models/user";
+import { v4 as uuidv4 } from "uuid";
+import deleteImage from "../helpers/deleteImg";
+import postImg from "../helpers/uploadImg";
 
 const controller = {};
 
@@ -158,4 +161,4 @@ controller.testUser = async (req, res) => {
 }
 
 
-module.exports = controller;
+export default controller;
