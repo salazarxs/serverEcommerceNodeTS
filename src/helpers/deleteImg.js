@@ -1,4 +1,5 @@
-import fs from 'fs';
+
+const fs = require('fs')
 
 const deleteImage = (folder, file) => {
     console.log(folder);
@@ -16,5 +17,4 @@ const deleteImage = (folder, file) => {
 
 
 
-
-export default deleteImage;
+module.exports = deleteImage;

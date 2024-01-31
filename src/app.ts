@@ -1,8 +1,7 @@
-import express from "express";
-import cors from "cors";
-import fileUpload from "express-fileupload";
-import router from "./routes/user.js";
-import dotenv from "dotenv";
+const express = require("express");
+const cors = require("cors");
+const fileUpload = require("express-fileupload");
+const dotenv = require("dotenv");
 
 dotenv.config();
 
@@ -47,6 +46,6 @@ myapp.use(fileUpload());
 myapp.use(express.json());
 
 // routes
-myapp.use("/api/v1", router);
+myapp.use("/api/v1", require("./routes/user"));
 
-export default myapp;
+module.exports = myapp;

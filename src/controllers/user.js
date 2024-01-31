@@ -1,10 +1,9 @@
+const UsersModel = require('../models/user.js');
+const { v4: uuidv4 } = require('uuid');
 
+const deleteImage = require('../helpers/deleteImg.js');
 
-import postImg from '../helpers/uploadImg.js';
-import UsersModel from '../models/user.js';
-import { v4 as uuidv4 } from 'uuid';
-import fs from 'fs'
-import deleteImage from '../helpers/deleteImg.js';
+const postImg = require('../helpers/uploadImg.js')
 
 
 const controller = {};
@@ -159,5 +158,4 @@ controller.testUser = async (req, res) => {
 }
 
 
-
-export default controller
+module.exports = controller;

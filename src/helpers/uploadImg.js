@@ -1,4 +1,4 @@
-import { v4 as uuidv4 } from 'uuid';
+const { v4: uuidv4 } = require('uuid');
 
 
 const postImg = async (img, folder) => {
@@ -25,4 +25,4 @@ const postImg = async (img, folder) => {
     }
 };
 
-export default postImg;
+module.exports = postImg;
