@@ -1,13 +1,6 @@
 import { Request, Response } from "express";
 import ProductModel from "../models/product";
-
-type Product = {
-  productName: string;
-  categoryID: number;
-  productDescription: string;
-  price: number;
-  productImage?: string;
-};
+import { Product } from "../types/product";
 
 export const CreateProduct = async (req: Request, res: Response) => {
   const product: Product = req.body;
@@ -20,7 +13,24 @@ export const CreateProduct = async (req: Request, res: Response) => {
     }
   } catch (err) {
     res.status(500).json({
-      message: "Internal server error",
+      message: `Internal server error-> ${err}`,
+    });
+  }
+};
+
+export const FindProductsByQuantity = async (req: Request, res: Response) => {
+  const { quantity } = req.body;
+
+  try {
+    const products = await ProductModel.findAll({
+      limit: quantity,
+    });
+    if (products) {
+      res.status(200).json({ products });
+    }
+  } catch (err) {
+    res.status(500).json({
+      message: `Internal server error-> ${err}`,
     });
   }
 };
