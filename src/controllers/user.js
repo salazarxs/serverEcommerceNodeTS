@@ -62,7 +62,6 @@ controller.getUser = async (req, res) => {
                 }
             });
         } else {
-            // Las contraseñas no coinciden, devuelve false
             res.status(200).json({ message: 'false' });
         }
     } catch (err) {

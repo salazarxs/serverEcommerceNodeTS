@@ -27,8 +27,7 @@ export const FindProductsByQuantity = async (
   const quantity = req.query.quantity as string | undefined;
 
   const JWT = req.get("JWT");
-  // const JWT = headers["JWT"];
-  console.log(JWT);
+
   let validateJWT;
   if (JWT) {
     validateJWT = await ValidateJWT(JWT.toString());
