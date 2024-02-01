@@ -31,7 +31,7 @@ const ProductModel = db.define(
   },
   {
     tableName: "PRODUCTS",
-    timeStamp: false,
+    timestamps: false,
   }
 );
 

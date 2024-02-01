@@ -8,7 +8,10 @@ import Express, { Application } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import fileUpload from "express-fileupload";
+
+//routes
 import UserRoutes from "./routes/user";
+import productRoutes from "./routes/products";
 
 dotenv.config();
 
@@ -47,5 +50,6 @@ myapp.use(Express.json());
 
 // routes
 myapp.use("/api/v1", UserRoutes);
+myapp.use("/api/v1", productRoutes);
 
 export default myapp;

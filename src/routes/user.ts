@@ -2,7 +2,6 @@
 import { Router } from "express";
 
 const router = Router();
-
 /* router.route('/user').post(postNewUser);
 router.route('/user/login').post(getUser);
 router.route('/user/firsttime').post(getFirstTime);

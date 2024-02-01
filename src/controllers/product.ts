@@ -1,6 +1,8 @@
 import { Request, Response } from "express";
 import ProductModel from "../models/product";
 import { Product } from "../types/product";
+import { ValidateJWT } from "../helpers/JWT";
+import { IncomingHttpHeaders } from "http";
 
 export const CreateProduct = async (req: Request, res: Response) => {
   const product: Product = req.body;
@@ -18,19 +20,38 @@ export const CreateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const FindProductsByQuantity = async (req: Request, res: Response) => {
-  const { quantity } = req.body;
+export const FindProductsByQuantity = async (
+  req: Request<{}, {}, {}, IncomingHttpHeaders>,
+  res: Response
+) => {
+  const quantity = req.query.quantity as string | undefined;
 
-  try {
-    const products = await ProductModel.findAll({
-      limit: quantity,
-    });
-    if (products) {
-      res.status(200).json({ products });
+  const JWT = req.get("JWT");
+  // const JWT = headers["JWT"];
+  console.log(JWT);
+  let validateJWT;
+  if (JWT) {
+    validateJWT = await ValidateJWT(JWT.toString());
+
+    if (!validateJWT) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
     }
-  } catch (err) {
-    res.status(500).json({
-      message: `Internal server error-> ${err}`,
-    });
+    try {
+      const products = await ProductModel.findAll({
+        limit: parseInt(quantity || "10", 10),
+      });
+      if (products) {
+        return res.status(200).json({ products });
+      }
+    } catch (err) {
+      return res.status(500).json({
+        message: `Internal server error-> ${err}`,
+      });
+    }
   }
+  return res.status(401).json({
+    message: `Unauthorized`,
+  });
 };
