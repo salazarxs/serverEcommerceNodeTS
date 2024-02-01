@@ -20,10 +20,7 @@ export const CreateProduct = async (req: Request, res: Response) => {
   }
 };
 
-export const FindProductsByQuantity = async (
-  req: Request<{}, {}, {}, IncomingHttpHeaders>,
-  res: Response
-) => {
+export const FindProductsByQuantity = async (req: Request, res: Response) => {
   const quantity = req.query.quantity as string | undefined;
 
   const JWT = req.get("JWT");

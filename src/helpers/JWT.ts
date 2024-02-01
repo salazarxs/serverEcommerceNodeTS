@@ -26,7 +26,6 @@ export const ValidateJWT = async (jwt: string) => {
     });
     return true;
   } catch (err) {
-    console.log(err);
     return false;
   }
 };
