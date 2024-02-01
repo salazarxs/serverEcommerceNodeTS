@@ -5,6 +5,19 @@ import { ValidateJWT } from "../helpers/JWT";
 import { IncomingHttpHeaders } from "http";
 
 export const CreateProduct = async (req: Request, res: Response) => {
+  const JWT = req.get("JWT");
+
+  let validateJWT;
+  if (JWT) {
+    validateJWT = await ValidateJWT(JWT.toString());
+
+    if (!validateJWT) {
+      return res.status(401).json({
+        message: "Unauthorized",
+      });
+    }
+  }
+
   const product: Product = req.body;
   try {
     const newProduct = await ProductModel.create(product);
@@ -21,8 +34,6 @@ export const CreateProduct = async (req: Request, res: Response) => {
 };
 
 export const FindProductsByQuantity = async (req: Request, res: Response) => {
-  const quantity = req.query.quantity as string | undefined;
-
   const JWT = req.get("JWT");
 
   let validateJWT;
@@ -35,6 +46,7 @@ export const FindProductsByQuantity = async (req: Request, res: Response) => {
       });
     }
     try {
+      const quantity = req.query.quantity as string | undefined;
       const products = await ProductModel.findAll({
         limit: parseInt(quantity || "10", 10),
       });
