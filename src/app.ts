@@ -18,14 +18,7 @@ myapp.set("port", process.env.PORT || 3005);
 
 // middlewares
 
-const allowedOrigins = [
-  "http://localhost:3000",
-  "http://localhost:5173", // Otras direcciones permitidas si las tienes
-  "http://192.168.1.91", // Agrega aquí la dirección IP del NodeMCU
-  "*",
-  "https://mygrowapp.netlify.app",
-  "192.168.1.91:19000",
-];
+const allowedOrigins = ["http://localhost:5173"];
 
 const corsOptions = {
   origin: function (origin: any, callback: any) {
