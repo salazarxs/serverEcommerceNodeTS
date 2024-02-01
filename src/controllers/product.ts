@@ -2,7 +2,6 @@ import { Request, Response } from "express";
 import ProductModel from "../models/product";
 import { Product } from "../types/product";
 import { ValidateJWT } from "../helpers/JWT";
-import { IncomingHttpHeaders } from "http";
 
 export const CreateProduct = async (req: Request, res: Response) => {
   const JWT = req.get("JWT");
