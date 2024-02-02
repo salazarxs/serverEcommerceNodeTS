@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import ProductModel from "../models/product";
 import { Product } from "../types/product";
 import { GenerateJWT, ValidateJWT } from "../helpers/JWT";
+import UploadImg from "../helpers/uploadImg";
 
 export const CreateProduct = async (req: Request, res: Response) => {
   const JWT = req.get("Authorization");
@@ -18,6 +19,15 @@ export const CreateProduct = async (req: Request, res: Response) => {
   }
 
   const product: Product = req.body;
+
+  const imgPath: string = await UploadImg(product.productImage, "products");
+  if (imgPath == "error") {
+    res.status(500).json({
+      message: "Error to upload image",
+    });
+  }
+  product.productImage = imgPath;
+
   try {
     const newProduct = await ProductModel.create(product);
     if (newProduct) {
