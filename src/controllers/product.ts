@@ -6,7 +6,7 @@ import { GenerateJWT, ValidateJWT } from "../helpers/JWT";
 export const CreateProduct = async (req: Request, res: Response) => {
   const JWT = req.get("Authorization");
 
-  let validateJWT;
+  let validateJWT: boolean;
   if (JWT) {
     validateJWT = await ValidateJWT(JWT.toString());
 
@@ -21,7 +21,7 @@ export const CreateProduct = async (req: Request, res: Response) => {
   try {
     const newProduct = await ProductModel.create(product);
     if (newProduct) {
-      const resJWT = await GenerateJWT(product.productName);
+      const resJWT: string = await GenerateJWT(product.productName);
       res.setHeader("Authorization", resJWT);
       res.status(200).json({
         message: "Product created successful",
@@ -35,9 +35,9 @@ export const CreateProduct = async (req: Request, res: Response) => {
 };
 
 export const FindProductsByQuantity = async (req: Request, res: Response) => {
-  const JWT = req.get("Authorization");
+  const JWT = req.get("Authorization") as string | undefined;
 
-  let validateJWT;
+  let validateJWT: boolean;
   if (JWT) {
     validateJWT = await ValidateJWT(JWT.toString());
 
